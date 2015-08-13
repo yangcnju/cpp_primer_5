@@ -11,7 +11,9 @@ public:
 	String():
 		elements(nullptr), first_free(nullptr), cap(nullptr) {}
 	String(const String&);
+	String(String&&) noexcept;
 	String& operator=(const String&);
+	String& operator=(String&&) noexcept;
 	String(const std::initializer_list<char> &il);
 	~String();
 

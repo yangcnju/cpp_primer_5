@@ -13,6 +13,10 @@ String::String(const String &rhs)
 	std::cout << "copy constructor utilized." << std::endl;
 }
 
+String::String(String &&rhs) noexcept :
+	elements(rhs.elements), first_free(rhs.first_free), cap(rhs.cap)
+{ rhs.elements = rhs.first_free = rhs.cap = nullptr; }
+
 String& String::operator=(const String &rhs)
 {
 	auto newdata = alloc_n_copy(rhs.begin(),rhs.end());
@@ -20,6 +24,18 @@ String& String::operator=(const String &rhs)
 	elements = newdata.first;
 	first_free = cap = newdata.second;
 	std::cout << "copy-assignment utilized." << std::endl;
+	return *this;
+}
+
+String& String::operator=(String &&rhs) noexcept
+{
+	if(this != &rhs){
+		free();
+		elements = rhs.elements;
+		first_free = rhs.first_free;
+		cap = rhs.cap;
+		rhs.elements = rhs.first_free = rhs.cap = nullptr;
+	}
 	return *this;
 }
 

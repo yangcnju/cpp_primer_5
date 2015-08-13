@@ -12,6 +12,16 @@ StrBlob::StrBlob() : data(make_shared<vector<string>>()) {}
 StrBlob::StrBlob(initializer_list<string> il):
 	data(make_shared<vector<string>>(il)) {}
 
+// move copy control
+StrBlob::StrBlob(StrBlob &&rhs) noexcept :
+	data(std::move(rhs.data)) {}
+
+StrBlob& StrBlob::operator=(StrBlob &&rhs) noexcept
+{
+	data = std::move(rhs.data);
+	return *this;
+}
+
 void StrBlob::check(size_type i, const string &msg) const
 {
 	if(i>=data->size())

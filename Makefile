@@ -2,7 +2,8 @@
 #OBJS = main.cc
 #OBJS = ex13.40.cc StrVec.cc
 #OBJS = ex13.46.cc
-OBJS = ex13.48.main.cc String.cc
+#OBJS = ex13.48.main.cc String.cc
+OBJS = sketch_move.cc
 
 # CPP specifies compiler
 CPP = g++

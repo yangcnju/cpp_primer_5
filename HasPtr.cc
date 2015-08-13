@@ -3,6 +3,13 @@
 HasPtr::HasPtr(const HasPtr &rhs):
 	ps(rhs.ps), i(rhs.i), use(rhs.use) { ++*use; }
 
+HasPtr::HasPtr(HasPtr &&hp) noexcept:
+	ps(hp.ps),i(hp.i),use(hp.use)
+{
+	hp.ps = nullptr;
+	hp.use = nullptr;
+}
+
 HasPtr& HasPtr::operator=(const HasPtr &rhs)
 {
 	--*use;
@@ -14,6 +21,18 @@ HasPtr& HasPtr::operator=(const HasPtr &rhs)
 	i = rhs.i;
 	use = rhs.use;
 	++*use;
+	return *this;
+}
+
+HasPtr& HasPtr::operator=(HasPtr &&rhs) noexcept
+{
+	if(this!=&rhs){
+		ps = rhs.ps;
+		i = rhs.i;
+		use = rhs.use;
+		ps = nullptr;
+		use = nullptr;
+	}
 	return *this;
 }
 

@@ -20,6 +20,12 @@ public:
 	StrBlob();
 	StrBlob(std::initializer_list<std::string> il);
 	size_type size() const { return data->size(); }
+
+	// copy control
+	StrBlob(const StrBlob&);
+	StrBlob(StrBlob &&) noexcept;
+	StrBlob& operator=(const StrBlob&);
+	StrBlob& operator=(StrBlob&&) noexcept;
 	
 	// add and remove elements
 	void push_back(const std::string &s) {data->push_back(s);}

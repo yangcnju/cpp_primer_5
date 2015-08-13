@@ -12,7 +12,9 @@ public:
 	HasPtr():
 		ps(new std::string()), i(0), use(new std::size_t(1)) {}
 	HasPtr(const HasPtr&);
+	HasPtr(HasPtr &&) noexcept;
 	HasPtr& operator=(const HasPtr&);
+	HasPtr& operator=(HasPtr&&) noexcept;
 	~HasPtr();
 
 	const std::string operator*() const;

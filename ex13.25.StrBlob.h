@@ -47,9 +47,14 @@ public:
 		data = std::make_shared<std::vector<std::string>>(*sb.data);
  		return *this;	
 	}
+	// move copy control
+	StrBlob(StrBlob &&) noexcept;
+	StrBlob& operator=(StrBlob&&) noexcept;
+
 
 	// add and remove elements
 	void push_back(const std::string &s) {data->push_back(s);}
+	void push_back(std::string &&s) {data->push_back(std::move(s));}
 	void pop_back();
 
 	std::string& front();
