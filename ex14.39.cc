@@ -1,3 +1,4 @@
+// copied from ex14.38.cc
 #include <string>
 #include <vector>
 #include <fstream>
@@ -37,8 +38,10 @@ int main(int argc, char **argv)
 	cout << "input filename: " << endl;
 	cin >> filename;
 	fstream fin(filename);
+
 	vector<string> all_words;
-	size_t num = 0;
+	vector<size_t> counts(10,0);
+
 	if(fin){
 		string line;
 		while(getline(fin,line)){
@@ -52,9 +55,15 @@ int main(int argc, char **argv)
 
 	s_length t(5);
 	for(auto iter = all_words.begin(); iter!=all_words.end(); ++iter){
-		if(t(*iter))
-			++num;
+		for(auto i = 0; i!=10; ++i){
+			s_length t(i+1);
+			if(t(*iter))
+				++counts[i];
+		}	
 	}
-	cout << "words of size " << t.size() << " occured: " << num << " times." << endl;
+	for(auto i = 0; i!=10; ++i){
+			cout << "words of size " << i+1 << " occured: " 
+					 << counts[i] << " times." << endl;
+	}
 	return 0;
 }
