@@ -12,6 +12,7 @@ public:
 		Quote(book, sales_price), min_qty(q), discount(d) {}
 	double net_price(std::size_t n) const override; 
 private:
+	static size_t max_qty;
 	std::size_t min_qty = 0;	// minimum purchase quantity for the discount
 	double discount = 0.0;	// fractional discount to apply
 };
