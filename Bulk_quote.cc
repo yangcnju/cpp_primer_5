@@ -18,3 +18,12 @@ double Bulk_quote::net_price(std::size_t n) const
 	else
 		return price * n;
 }
+
+std::vector<std::string> Bulk_quote::debug() const 
+{
+	std::vector<std::string> dats;
+	dats.push_back("max_qty");
+	dats.push_back("min_qty");
+	dats.push_back("discount");
+	return dats;
+}
