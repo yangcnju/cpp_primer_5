@@ -1,7 +1,33 @@
 #include "Bulk_quote.h"
+#include <iostream>
 
 std::size_t Bulk_quote::max_qty = 100;		// maximum number of copies for
 																					// discount price
+
+// constructors
+Bulk_quote::Bulk_quote(const Bulk_quote &b):
+	Quote(b), min_qty(b.min_qty), discount(b.discount)
+	{ std::cout << "Bulk_quote(const Bulk_quote&)" << std::endl; }
+
+Bulk_quote::Bulk_quote(Bulk_quote &&b):
+	Quote(std::move(b)), min_qty(b.min_qty), discount(b.discount)
+	{ std::cout << "Bulk_quote(Buok_quote&&)" << std::endl; }
+
+Bulk_quote& Bulk_quote::operator=(const Bulk_quote &b)
+{
+	Quote::operator=(b);
+	min_qty = b.min_qty;
+	discount = b.discount;
+	return *this;
+}
+
+Bulk_quote& Bulk_quote::operator=(Bulk_quote &&b)
+{
+	Quote::operator=(std::move(b));
+	min_qty = b.min_qty;
+	discount = b.discount;
+	return *this;
+}
 
 double Bulk_quote::net_price(std::size_t n) const
 {
