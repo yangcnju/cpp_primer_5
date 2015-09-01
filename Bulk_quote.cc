@@ -31,11 +31,11 @@ Bulk_quote& Bulk_quote::operator=(Bulk_quote &&b)
 
 double Bulk_quote::net_price(std::size_t n) const
 {
-	if(n>min_qty && n<max_qty){
+	if(n>=min_qty && n<max_qty){
 		max_qty-=n;
 		return (price - discount) * n;
 	}
-	else if(n>min_qty && n>=max_qty){
+	else if(n>=min_qty && n>=max_qty){
 		double temp = max_qty*(price-discount);
 		double final_price =  price*(n-max_qty)+temp;
 		max_qty = 0;

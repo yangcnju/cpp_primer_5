@@ -22,6 +22,10 @@ public:
 	double net_price(std::size_t n) const override; 
 
 	virtual std::vector<std::string> debug() const override;
+
+	// page 634
+	Bulk_quote* clone() const & { return new Bulk_quote(*this); }
+	Bulk_quote* clone() const && { return new Bulk_quote(std::move(*this)); }
 private:
 	static size_t max_qty;
 	std::size_t min_qty = 0;	// minimum purchase quantity for the discount

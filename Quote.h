@@ -24,10 +24,17 @@ public:
 
 	// ex15.11
 	virtual std::vector<std::string> debug() const;
+
+	// page 633 Virtual Copy
+	virtual Quote* clone() const & { return new Quote(*this); }
+	virtual Quote* clone() const && { return new Quote(std::move(*this)); }
 private:
 	std::string bookNo;
 protected:
 	double price = 0.0;
 };	// Quote
+
+// page 593 Dynamic Binding
+double print_total(std::ostream &os, const Quote &item, std::size_t n);
 
 #endif
