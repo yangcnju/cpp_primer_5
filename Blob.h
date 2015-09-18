@@ -106,7 +106,7 @@ private:
 
 // Implemenation of BlobPtr
 template <typename T>
-BlobPtr<T>& BlobPtr<T>::operator++() const
+BlobPtr<T>& BlobPtr<T>::operator++()
 {
 	check(curr, "increment past end of StrBlobPtr");
 	++curr;
@@ -114,7 +114,7 @@ BlobPtr<T>& BlobPtr<T>::operator++() const
 }
 
 template <typename T>
-BlobPtr<T>& BlobPtr<T>::operator--() const
+BlobPtr<T>& BlobPtr<T>::operator--()
 {
 	check(curr, "increment past end of StrBlobPtr");
 	--curr;
