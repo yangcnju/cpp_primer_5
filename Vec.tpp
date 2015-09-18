@@ -4,7 +4,7 @@
 #include "Vec.h"
 
 template <typename T>
-std::allocator<T> Vec<T>::alloc = std::allocator<T>();
+std::allocator<T> Vec<T>::alloc;
 
 // copy control
 template <typename T>
