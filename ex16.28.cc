@@ -9,6 +9,8 @@ using namespace my_ptrs;
 
 int main()
 {
+	// test shared_ptr
+	cout << "test shared_ptr" << endl;
 	my_ptrs::shared_ptr<int> isp(new int(5));
 	cout << *isp << " been used times: " << isp.usage() << endl;
 
@@ -27,6 +29,13 @@ int main()
 	cout << "usage for pointer pointing to 99: " << isp2.usage() << endl;
 	isp3 = isp2;
 	cout << "usage for pointer pointing to 99: " << isp3.usage() << endl;
+
+	// test unique_ptr
+	cout << "\ntest unique_tr" << endl;
+	my_ptrs::unique_ptr<int> iup(new int(1));
 	
+	string *sptr = new string("demo");
+	my_ptrs::unique_ptr<string> sup(sptr);
+
 	return 0;
 }

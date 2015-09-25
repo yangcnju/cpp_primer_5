@@ -16,6 +16,14 @@ shared_ptr<T> make_shared(T *t)
 	return ptr;
 }
 
+template <typename T>
+shared_ptr<T> make_shared(typename T::iterator b, typename T::iterator e)
+{
+	T *t= new T(b,e);
+	shared_ptr<T> ptr(std::move(t));
+	return ptr;
+}
+
 // own version of shared_ptr
 template <typename T>
 class shared_ptr {
@@ -35,14 +43,16 @@ public:
 	~shared_ptr()
 	{ 
 		if((--count) == 0) {
-			std::cout << "deleter." << std::endl;
+			std::cout << "shared_ptr deleter." << std::endl;
 			delete p; 
 		}
 	}
 
 	// interface
 	T operator*() { return *p; }
+	T const operator*() const { return *p; }
 	T* operator->() { return p; }
+	T const * operator->() const { return p; }
 	unsigned usage() const { return count; }
 private:
 	T *p;
@@ -56,7 +66,20 @@ public:
 	unique_ptr(): p(new T) {}
 	unique_ptr(T *t): p(std::move(t)) {}	// t not useful after been
 	                                      // used by unique_ptr
-	~unique_ptr()	{ delete p; }
+	unique_ptr(unique_ptr<T> &uptr) : p(new T(*(uptr.p))) {}
+	unique_ptr(unique_ptr<T> &&uptr) noexcept : 
+		p(std::move(*(uptr.p))) {}
+	unique_ptr& operator=(unique_ptr<T> &uptr)
+	{ if(*p!=*(uptr.p)) p = new T(*(uptr.p)); return *this; }
+	unique_ptr& operator=(unique_ptr<T> &&uptr) noexcept
+	{ if(*p!=*(uptr.p)) p = std::move(*(uptr.p)); return *this; }
+	~unique_ptr()	{ std::cout << "unique_ptr deleter." << std::endl; delete p; }
+
+	// interface
+	T operator*() { return *p; }
+	T const operator*() const { return *p; }
+	T* operator->() { return p; }
+	T const * operator->() const { return p; }
 private:
 	T *p;
 };	// template class unique_ptr
