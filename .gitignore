@@ -7,3 +7,5 @@ Makefile
 # no .o files
 *.o
 
+# no .sh files
+*.sh
