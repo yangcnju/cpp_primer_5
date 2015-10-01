@@ -36,6 +36,14 @@ void Vec<T>::push_back(const T &t)
 }
 
 template <typename T>
+template <typename ... Args>
+void Vec<T>::emplace_back(Args&& ... args)
+{
+	chk_n_alloc();
+	alloc.construct(first_free++, std::forward<Args>(args)...);
+}
+
+template <typename T>
 std::pair<T*, T*> Vec<T>::alloc_n_copy(const T *b, const T *e)
 {
 	auto data = alloc.allocate(e-b);

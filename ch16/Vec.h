@@ -3,7 +3,7 @@
 #define _Vec_h
 
 #include <memory>
-#include <utility>	// pair
+#include <utility>	// pair, forward
 #include <string>
 
 template <typename T>
@@ -16,6 +16,7 @@ public:
 	~Vec();
 
 	void push_back(const T&);
+	template <typename ... Args> void emplace_back(Args&&...);
 	size_t size() const { return first_free - elements; }
 	size_t capacity() const { return cap - elements; }
 	T *begin() const { return elements; }
