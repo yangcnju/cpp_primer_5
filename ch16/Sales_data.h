@@ -6,9 +6,13 @@
 #include <string>
 #include <memory>
 
+class Sales_data;
+template <> struct std::hash<Sales_data>;
+
 class Sales_data{
 	friend std::ostream& operator<<(std::ostream&, const Sales_data&);
 	friend std::istream& operator>>(std::istream&, Sales_data&);
+	friend struct std::hash<Sales_data>;
 public:
 	Sales_data(): 
 		item_name(std::make_shared<std::string>(std::string())), 
