@@ -1,0 +1,11 @@
+# no main
+main
+
+# no Makefile
+Makefile
+
+# no .o files
+*.o
+
+# no .sh files
+*.sh
